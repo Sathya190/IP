@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <script>
+        function validation(form) {
+            var namePattern = /^\w+$/;
+            var username = document.getElementById("username").value;
+            if (!namePattern.test(username)) {
+                alert("Enter a valid username (only letters, digits, underscore)");
+                return false;
+            }
+
+            var password = document.getElementById("password").value;
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long");
+                return false;
+            }
+
+            var confirmPassword = document.getElementById("confirm-password").value;
+            if (confirmPassword !== password) {
+                alert("Passwords do not match");
+                return false;
+            }
+
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var email = document.getElementById("email").value;
+            if (!emailPattern.test(email)) {
+                alert("Enter a valid email address");
+                return false;
+            }
+
+            var phonePattern = /^[0-9]{10}$/;
+            var phone = document.getElementById("phone").value;
+            if (!phonePattern.test(phone)) {
+                alert("Enter a valid 10-digit phone number");
+                return false;
+            }
+
+            var ccPattern = /^[0-9]{16}$/;
+            var ccNumber = document.getElementById("creditcard").value;
+            if (!ccPattern.test(ccNumber)) {
+                alert("Enter a valid 16-digit credit card number");
+                return false;
+            }
+
+            if (form.gender[0].checked == false && form.gender[1].checked == false) {
+                alert("Please choose your gender");
+                return false;
+            }
+
+            if (document.form.dept.selectedIndex <= 0) {
+                alert("Please choose your department");
+                return false;
+            }
+
+            if (!document.getElementById("agree").checked) {
+                alert("Please agree to the terms");
+                return false;
+            }
+            var submissionDate = new Date().toLocaleDateString();
+            alert("Registration Successful\nSubmission Date: " + submissionDate);
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>User Registration Form</h2>
+    <form name="form" onsubmit="return validation(this)">
+        Username: <input type="text" id="username" name="username"><br><br>
+        Password: <input type="password" id="password" name="password"><br><br>
+        Confirm Password: <input type="password" id="confirm-password" name="confirm-password"><br><br>
+        Email: <input type="text" id="email" name="email"><br><br>
+        Phone: <input type="text" id="phone" name="phone"><br><br>
+        Pincode: <input type="text" id="pincode" name="pincode"><br><br>
+        Credit Card Number: <input type="text" id="creditcard" name="creditcard"><br><br>
+        Gender:
+        <input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female<br><br>
+        Department:
+        <select name="dept">
+            <option value="">Select Dept</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+        </select><br><br>
+        <input type="checkbox" id="agree" name="agree"> I agree to the terms<br><br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
